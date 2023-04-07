@@ -61,6 +61,13 @@ Cypress.Commands.add('search_customer', (data,keterangan) => {
     cy.get(`tbody > :nth-child(2) > :nth-child(${index})`).contains(data)
 })
 
+Cypress.Commands.add('search_deleted_customer', (data) => {
+    let index = 0;
+    cy.get('#searching').type(data)
+    cy.get('.container > div > form > .btn').should('have.value','Search').click()
+    cy.get('td').contains('No Match')
+})
+
 Cypress.Commands.add('access_detail_customer', (data) => {
     cy.url().should('include','/Customer/Details')
     cy.get('h2').should('have.text','Details')
